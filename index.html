@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Azwad Sifat · Performance Marketer">
+<meta property="og:description" content="Paid user acquisition for AI and subscription products. $5M a year in paid media, annual revenue grown from $200K to $7M+.">
+<meta property="og:type" content="website">
+<title>Azwad Sifat</title>
+<meta name="description" content="Azwad Sifat, performance marketer: paid user acquisition for AI and subscription products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night-sky console. A dotted planet opens the page, then one calm column of proof
+   (numbers, measured projects, a short bio), steered by a floating dock at the bottom.
+   Single deliberate dark look, as in the reference the owner chose. */
+:root {
+  color-scheme: dark;
+  --night: #06080c;      /* page ground, blue-biased near-black */
+  --panel: #0d121a;      /* tiles */
+  --panel-2: #151c27;    /* raised / active */
+  --line: #1b2431;       /* hairlines */
+  --line-2: #2a3546;     /* stronger borders */
+  --ink: #e9eef5;        /* headings */
+  --ink-2: #b3bfcd;      /* body */
+  --muted: #7a889a;      /* captions */
+  --mint: #5eead4;       /* accent: results, active states */
+  --mint-soft: rgba(94, 234, 212, 0.14);
+  --ice: #bfd6ff;        /* planet dots, secondary data */
+  --ice-soft: rgba(191, 214, 255, 0.22);
+  --font-sans: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r-tile: 18px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--night);
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+/* faint fixed starfield behind everything below the hero */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .55;
+  background:
+    radial-gradient(1px 1px at 12% 18%, var(--ice-soft), transparent 60%),
+    radial-gradient(1px 1px at 78% 9%, var(--ice-soft), transparent 60%),
+    radial-gradient(1.4px 1.4px at 91% 42%, var(--ice-soft), transparent 60%),
+    radial-gradient(1px 1px at 33% 61%, var(--ice-soft), transparent 60%),
+    radial-gradient(1.2px 1.2px at 57% 83%, var(--ice-soft), transparent 60%),
+    radial-gradient(1px 1px at 6% 76%, var(--ice-soft), transparent 60%),
+    radial-gradient(1px 1px at 68% 31%, var(--ice-soft), transparent 60%);
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+h1, h2, h3 { color: var(--ink); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; }
+#sky { position: absolute; inset: 0; display: block; }
+.hero-inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 24px 40px; }
+.planet-space { height: 320px; flex: none; }
+.hero-name {
+  font-size: clamp(40px, 7vw, 72px); font-weight: 600; line-height: 1.02; letter-spacing: -0.035em;
+  text-shadow: 0 2px 24px rgba(6, 8, 12, .9), 0 0 60px rgba(6, 8, 12, .8);
+}
+.hero-role { margin-top: 12px; font-family: var(--font-mono); font-size: clamp(13px, 1.6vw, 16px); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+@media (max-width: 560px) { .hero-role .sep { display: none; } .hero-role span { display: block; } }
+.hero-pitch { margin-top: 22px; max-width: 40rem; font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+.hero-pitch b { color: var(--ink); font-weight: 600; }
+.ctas { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 14px;
+  font-size: 16px; font-weight: 500; text-decoration: none; color: var(--ink);
+  border: 1px solid var(--line-2); background: rgba(13, 18, 26, .7);
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--mint); color: #04110f; border-color: var(--mint); font-weight: 600; }
+.btn.primary:hover { background: #7ff0de; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+@media (prefers-reduced-motion: no-preference) { .btn:hover { transform: translateY(-1px); } }
+.status { margin-top: 20px; display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: var(--muted); }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px var(--mint-soft); }
+
+/* ---------- sections ---------- */
+section { padding-block: 72px 8px; scroll-margin-top: 24px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; max-width: 46rem; }
+.sec-head h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; font-weight: 600; }
+.sec-head p { color: var(--ink-2); }
+.tile {
+  background: linear-gradient(180deg, rgba(191, 214, 255, .035), transparent 40%), var(--panel);
+  border: 1px solid var(--line); border-radius: var(--r-tile); padding: 22px; min-width: 0;
+}
+
+/* results */
+.results { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) { .results { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .results { grid-template-columns: 1fr; } }
+.kpi { display: flex; flex-direction: column; gap: 6px; }
+.kpi .num { font-size: clamp(34px, 4vw, 44px); font-weight: 600; color: var(--ink); letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.kpi .what { color: var(--ink); font-weight: 500; }
+.kpi .sub { font-size: 14px; color: var(--muted); }
+.kpi .viz { margin-top: auto; padding-top: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 3px 10px; background: rgba(255,255,255,.02); }
+
+/* mini comparison charts (all bars drawn to scale) */
+.cmp { display: grid; gap: 6px; }
+.cmp + .cmp { margin-top: 14px; }
+.cmp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13px; color: var(--muted); }
+.cmp-head b { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: var(--mint); white-space: nowrap; }
+.bar { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) auto; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.bar .track { height: 8px; border-radius: 4px; background: rgba(255,255,255,.04); overflow: hidden; }
+.bar .track i { display: block; height: 100%; border-radius: 4px; background: #3b4a5e; min-width: 3px; }
+.bar.now .track i { background: var(--mint); }
+.bar.now { color: var(--ink-2); }
+.bar .val { min-width: 3.2rem; text-align: right; font-variant-numeric: tabular-nums; }
+.share { height: 8px; border-radius: 4px; background: rgba(255,255,255,.06); overflow: hidden; display: flex; }
+.share i { display: block; height: 100%; background: var(--mint); }
+.squares { display: flex; gap: 5px; flex-wrap: wrap; }
+.squares i { width: 14px; height: 14px; border-radius: 3px; background: var(--mint); }
+.squares i.start { background: var(--ice); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
+.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--mint); vertical-align: 0; }
+.legend span.start::before { background: var(--ice); }
+
+/* work grid */
+.work { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 980px) { .work { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .work { grid-template-columns: 1fr; } }
+.case { display: flex; flex-direction: column; gap: 10px; transition: border-color .25s, transform .25s; }
+.case:hover { border-color: var(--line-2); }
+@media (prefers-reduced-motion: no-preference) { .case:hover { transform: translateY(-2px); } }
+.case h3 { font-size: 19px; font-weight: 600; line-height: 1.3; }
+.case .desc { font-size: 15px; color: var(--ink-2); }
+.case .viz { margin-top: 8px; padding: 16px; border-radius: 12px; background: rgba(0,0,0,.25); border: 1px solid var(--line); }
+.case .tools { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+/* about */
+.about-grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+.bio { font-size: clamp(17px, 1.9vw, 19px); line-height: 1.65; color: var(--ink-2); max-width: 38rem; }
+.bio b { color: var(--ink); font-weight: 600; }
+.role-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.role-top h3 { font-size: 20px; font-weight: 600; }
+.role-top .when { font-family: var(--font-mono); font-size: 13px; color: var(--mint); }
+.role-org { color: var(--ink); font-weight: 500; margin-top: 2px; }
+.role-org span { color: var(--muted); font-weight: 400; }
+.role .chips { margin-top: 14px; }
+ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+ul.ticks li { position: relative; padding-left: 20px; font-size: 15px; }
+ul.ticks li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px; background: var(--mint); }
+ul.ticks b { color: var(--ink); font-weight: 600; }
+.sub-h { margin-top: 48px; margin-bottom: 16px; font-size: 22px; font-weight: 600; }
+.sub-p { margin-top: -8px; margin-bottom: 18px; color: var(--muted); max-width: 44rem; }
+.funnels { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) { .funnels { grid-template-columns: 1fr; } }
+.funnel { display: grid; gap: 12px; align-content: start; }
+.funnel h4 { margin: 0; color: var(--ink); font-size: 17px; font-weight: 600; }
+.kv { display: grid; gap: 2px; }
+.kv dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.kv dd { margin: 0; font-size: 15px; color: var(--ink-2); }
+.kv dd.res { color: var(--mint); font-family: var(--font-mono); font-size: 15px; }
+.fit { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .fit { grid-template-columns: 1fr; } }
+.fit .tile { display: grid; gap: 6px; }
+.fit h4 { margin: 0; color: var(--ink); font-size: 17px; font-weight: 600; }
+.fit p { font-size: 15px; }
+
+/* skills */
+.skills { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .skills { grid-template-columns: 1fr; } }
+.skills h3 { font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.skills .chips .chip { font-size: 13px; padding: 5px 12px; color: var(--ink); }
+ul.ticks.cols { display: block; columns: 2 12rem; column-gap: 24px; }
+.cols li { break-inside: avoid; margin-bottom: 10px; }
+.plain { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.plain li { display: flex; justify-content: space-between; gap: 12px; color: var(--ink); }
+.plain li span { color: var(--muted); font-family: var(--font-mono); font-size: 13px; white-space: nowrap; }
+.stack { display: grid; gap: 22px; }
+
+/* contact */
+.contact { text-align: left; display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+.contact h2 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; font-weight: 600; }
+.contact .lead { margin-top: 16px; font-size: 18px; max-width: 30rem; }
+.contact .ctas { justify-content: flex-start; }
+.rows { display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+.row dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.row dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; user-select: all; }
+.row a { color: var(--ink); text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+.copy { font: 500 13px var(--font-sans); color: var(--ink); background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 10px; padding: 7px 12px; cursor: pointer; }
+.copy:hover { border-color: var(--muted); }
+footer { margin-top: 72px; padding-block: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* floating dock */
+.dock {
+  position: fixed; z-index: 30; left: 50%; transform: translateX(-50%);
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 8px; align-items: center;
+  max-width: calc(100vw - var(--gutter-l) - var(--gutter-r));
+}
+.dock-cv, .dock-links {
+  background: rgba(15, 20, 29, .82); border: 1px solid var(--line-2);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+.dock-cv { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 500; font-size: 15px; white-space: nowrap; }
+.dock-cv svg { width: 15px; height: 15px; }
+.dock-links { display: flex; gap: 2px; padding: 5px; border-radius: 999px; min-width: 0; }
+.dock-links a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; text-decoration: none; color: var(--muted); font-size: 15px; white-space: nowrap; transition: color .2s, background .2s; }
+.dock-links a::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--line-2); transition: background .2s; }
+.dock-links a:hover { color: var(--ink); }
+.dock-links a.on { color: var(--ink); background: var(--panel-2); }
+.dock-links a.on::before { background: var(--mint); }
+@media (max-width: 460px) {
+  .dock { gap: 6px; }
+  .dock-cv { padding: 10px 13px; font-size: 14px; }
+  .dock-cv svg { display: none; }
+  .dock-links a { padding: 8px 9px; font-size: 14px; gap: 0; }
+  .dock-links a::before { display: none; }
+}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-inner wrap">
+    <div class="planet-space" aria-hidden="true"></div>
+    <h1 class="hero-name">Azwad Sifat</h1>
+    <p class="hero-role"><span>Performance Marketer</span><span class="sep"> · </span><span>Paid User Acquisition</span></p>
+    <p class="hero-pitch">I scale paid acquisition for AI and subscription products. At Google I manage <b>$5M a year</b> in paid media across Meta, TikTok and Google, and grew annual revenue from $200K to <b>over $7M</b>.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#contact">Contact me</a>
+      <a class="btn" href="Azwad_Sifat_CV_EverAI.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        Open CV (PDF)
+      </a>
+    </div>
+    <p class="status"><span class="pulse" aria-hidden="true"></span>Open to remote roles · UTC+6, works any time zone</p>
+  </div>
+</header>
+
+<main>
+  <!-- RESULTS -->
+  <section id="results" aria-labelledby="results-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Results</span>
+        <h2 id="results-h">What I've delivered at Google</h2>
+      </div>
+      <div class="results">
+        <article class="tile kpi">
+          <div class="num">$5M/yr</div>
+          <div class="what">Paid media managed</div>
+          <div class="sub">$400K+ a month, with full ownership of results</div>
+          <div class="viz chips"><span class="chip">Meta</span><span class="chip">TikTok</span><span class="chip">Google</span></div>
+        </article>
+        <article class="tile kpi">
+          <div class="num">$7M+</div>
+          <div class="what">Annual revenue</div>
+          <div class="sub">Grown from $200K</div>
+          <div class="viz cmp">
+            <div class="bar"><span>Start</span><span class="track" aria-hidden="true"><i style="width:2.9%"></i></span><span class="val">$200K</span></div>
+            <div class="bar now"><span>Now</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val">$7M+</span></div>
+          </div>
+        </article>
+        <article class="tile kpi">
+          <div class="num">4.0x</div>
+          <div class="what">ROAS</div>
+          <div class="sub">$1M+ in revenue from $250K in spend</div>
+          <div class="viz cmp">
+            <div class="bar"><span>Spend</span><span class="track" aria-hidden="true"><i style="width:25%"></i></span><span class="val">$250K</span></div>
+            <div class="bar now"><span>Revenue</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val">$1M+</span></div>
+          </div>
+        </article>
+        <article class="tile kpi">
+          <div class="num">−25%</div>
+          <div class="what">Customer acquisition cost</div>
+          <div class="sub">From my Meta testing framework, with +30% conversion rate</div>
+          <div class="viz cmp">
+            <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val">100</span></div>
+            <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:75%"></i></span><span class="val">75</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Selected work</span>
+        <h2 id="work-h">Six projects, measured before and after</h2>
+        <p>Bars are drawn to scale. Where a project changed a rate, "before" is set to 100.</p>
+      </div>
+      <div class="work">
+        <article class="tile case">
+          <span class="eyebrow">Creative testing</span>
+          <h3>Meta Ads A/B testing framework</h3>
+          <p class="desc">A repeatable test loop across creatives, audiences and placements.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>Customer acquisition cost</span><b>−25%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:75%"></i></span><span class="val"></span></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>Conversion rate</span><b>+30%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:76.9%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+            </div>
+          </div>
+          <p class="tools">Meta Ads Manager · Canva</p>
+        </article>
+
+        <article class="tile case">
+          <span class="eyebrow">New channel launch</span>
+          <h3>TikTok Ads, from $0 to $50K a month</h3>
+          <p class="desc">Opened TikTok as a new paid channel and scaled it to $50K in monthly revenue.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>Share of revenue at launch</span><b>15%</b></div>
+              <div class="share" aria-hidden="true"><i style="width:15%"></i></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>CAC vs Instagram</span><b>−30%</b></div>
+              <div class="bar"><span>Insta</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>TikTok</span><span class="track" aria-hidden="true"><i style="width:70%"></i></span><span class="val"></span></div>
+            </div>
+          </div>
+          <p class="tools">TikTok Ads · CapCut</p>
+        </article>
+
+        <article class="tile case">
+          <span class="eyebrow">Media deals</span>
+          <h3>Google Ads bulk-buy negotiation</h3>
+          <p class="desc">Negotiated better terms on a bulk media buy with the Google Ads team.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>ROAS</span><b>2.5x → 3.8x</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:65.8%"></i></span><span class="val">2.5x</span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val">3.8x</span></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>Cost per click</span><b>−15%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:85%"></i></span><span class="val"></span></div>
+            </div>
+          </div>
+          <p class="tools">Google Ads · CRM</p>
+        </article>
+
+        <article class="tile case">
+          <span class="eyebrow">Sales-led funnel</span>
+          <h3>Lead nurturing workflow</h3>
+          <p class="desc">Automated follow-up for the sales-led demo funnel, with demos tracked to closed-won revenue in the CRM.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>Demo bookings</span><b>+40%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:71.4%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>Team time saved</span><b>10+ hrs/week</b></div>
+            </div>
+          </div>
+          <p class="tools">HubSpot · Zapier · Calendly</p>
+        </article>
+
+        <article class="tile case">
+          <span class="eyebrow">SOPs &amp; playbooks</span>
+          <h3>Paid Ads Team Playbook</h3>
+          <p class="desc">Documented how the team sets up and launches every campaign.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>Campaign setup errors</span><b>−90%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:10%"></i></span><span class="val"></span></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>New-hire onboarding</span><b>3 days</b></div>
+            </div>
+          </div>
+          <p class="tools">Notion · Loom</p>
+        </article>
+
+        <article class="tile case">
+          <span class="eyebrow">Content &amp; SEO</span>
+          <h3>Content team scale-up</h3>
+          <p class="desc">Grew the content and SEO team to build top-of-funnel demand. Output rose 300%.</p>
+          <div class="viz">
+            <div class="cmp">
+              <div class="cmp-head"><span>Writers</span><b>2 → 10</b></div>
+              <div class="squares" aria-hidden="true"><i class="start"></i><i class="start"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="legend"><span class="start">at start</span><span>added</span></div>
+            </div>
+            <div class="cmp">
+              <div class="cmp-head"><span>Blog traffic</span><b>+900%</b></div>
+              <div class="bar"><span>Before</span><span class="track" aria-hidden="true"><i style="width:10%"></i></span><span class="val"></span></div>
+              <div class="bar now"><span>After</span><span class="track" aria-hidden="true"><i style="width:100%"></i></span><span class="val"></span></div>
+            </div>
+          </div>
+          <p class="tools">Trello · Grammarly · Ahrefs</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">About</span>
+        <h2 id="about-h">I write the ads and read the numbers</h2>
+      </div>
+      <div class="about-grid">
+        <p class="bio">I work both sides of growth. As a copywriter I write the <b>hooks, angles and scripts</b>. As a performance marketer I read the numbers (<b>CPA, ROAS, CAC/LTV and cohort retention</b>) to decide what to scale, fix or cut. I've launched channels from zero, negotiated media deals, and built the playbooks and automations that help a team scale.</p>
+        <article class="tile role">
+          <div class="role-top"><h3>Marketer &amp; Copywriter</h3><span class="when">2022 – Present</span></div>
+          <p class="role-org">Google <span>· Remote</span></p>
+          <div class="chips"><span class="chip">Gemini AI subscriptions</span><span class="chip">YouTube Premium</span><span class="chip">YouTube ads</span></div>
+          <ul class="ticks">
+            <li>Own <b>$5M a year in paid media</b> ($400K+ a month) across Google, Meta and TikTok.</li>
+            <li>Track performance daily in Voluum, GA4, AppsFlyer and Looker, and use SQL for cohort analysis.</li>
+            <li>Write hooks, angles and ad copy, and brief designers and editors on what wins.</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="sub-h">How I measure each funnel</h3>
+      <p class="sub-p">Each funnel is judged on its own metric, so pipeline and content numbers never get mixed into subscription results.</p>
+      <div class="funnels">
+        <article class="tile funnel">
+          <h4>Self-serve subscriptions</h4>
+          <dl class="kv"><dt>Channels</dt><dd>Meta, TikTok, Google</dd></dl>
+          <dl class="kv"><dt>Judged on</dt><dd>Subscriptions, CAC and ROAS</dd></dl>
+          <dl class="kv"><dt>Result</dt><dd class="res">$7M+ annual revenue</dd></dl>
+        </article>
+        <article class="tile funnel">
+          <h4>Sales-led demos</h4>
+          <dl class="kv"><dt>Tools</dt><dd>HubSpot, Zapier, Calendly</dd></dl>
+          <dl class="kv"><dt>Judged on</dt><dd>Pipeline tied to closed-won revenue</dd></dl>
+          <dl class="kv"><dt>Result</dt><dd class="res">Demo bookings +40%</dd></dl>
+        </article>
+        <article class="tile funnel">
+          <h4>Content &amp; SEO</h4>
+          <dl class="kv"><dt>Tools</dt><dd>Ahrefs, Trello, Grammarly</dd></dl>
+          <dl class="kv"><dt>Judged on</dt><dd>Blog-to-conversion rate: sign-ups, trials, demos</dd></dl>
+          <dl class="kv"><dt>Result</dt><dd class="res">Blog traffic +900%</dd></dl>
+        </article>
+      </div>
+
+      <h3 class="sub-h">What I bring to an AI growth team</h3>
+      <div class="fit">
+        <article class="tile"><h4>AI subscription experience</h4><p>I've acquired paying users for Gemini AI subscriptions and YouTube Premium.</p></article>
+        <article class="tile"><h4>Spend at scale</h4><p>$5M a year, $400K+ a month, with full ownership of results.</p></article>
+        <article class="tile"><h4>New channels from zero</h4><p>Took TikTok to 15% of revenue at launch. Ready to open Snapchat, Apple Search Ads and native next.</p></article>
+        <article class="tile"><h4>Comfortable with NSFW</h4><p>Comfortable advertising uncensored and NSFW AI products.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" aria-labelledby="skills-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Skills &amp; tools</span>
+        <h2 id="skills-h">Channels, tools and certifications</h2>
+      </div>
+      <div class="skills">
+        <article class="tile stack">
+          <div>
+            <h3>Channels</h3>
+            <div class="chips"><span class="chip">Meta (Facebook &amp; Instagram)</span><span class="chip">TikTok Ads</span><span class="chip">Google Ads</span><span class="chip">YouTube Ads</span></div>
+          </div>
+          <div>
+            <h3>Certifications</h3>
+            <ul class="plain"><li>Meta Blueprint</li><li>Google Ads</li><li>TikTok Ads</li></ul>
+          </div>
+        </article>
+        <article class="tile">
+          <h3>Core skills</h3>
+          <ul class="ticks cols" style="margin-top:0">
+            <li>Paid acquisition &amp; UA</li><li>Campaign scaling</li><li>Creative testing</li><li>Creative briefs &amp; copywriting</li><li>CPA, ROAS, CAC/LTV</li><li>Cohort &amp; retention analysis</li><li>Landing page &amp; funnel CRO</li><li>Media buying &amp; negotiation</li><li>Automation &amp; SOPs</li><li>Subscription growth</li>
+          </ul>
+        </article>
+        <article class="tile">
+          <h3>Tools</h3>
+          <div class="chips"><span class="chip">Voluum</span><span class="chip">GA4</span><span class="chip">AppsFlyer</span><span class="chip">Looker</span><span class="chip">SQL</span><span class="chip">Meta Ads Manager</span><span class="chip">TikTok Ads Manager</span><span class="chip">Google Ads</span><span class="chip">HubSpot</span><span class="chip">Zapier</span><span class="chip">Calendly</span><span class="chip">Notion</span><span class="chip">Loom</span><span class="chip">Canva</span><span class="chip">CapCut</span><span class="chip">Trello</span><span class="chip">Ahrefs</span><span class="chip">Grammarly</span></div>
+        </article>
+        <article class="tile stack">
+          <div>
+            <h3>Languages</h3>
+            <ul class="plain"><li>English <span>C2 · Fluent</span></li><li>Bengali <span>C2 · Fluent</span></li><li>Hindi <span>A2 · Basic</span></li></ul>
+          </div>
+          <div>
+            <h3>Education</h3>
+            <ul class="plain"><li>Southern University Bangladesh</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2 id="contact-h" style="margin-top:10px">Let's scale what works.</h2>
+          <p class="lead">I'm open to remote performance marketing and user acquisition roles, in any time zone.</p>
+          <div class="ctas">
+            <a class="btn primary" href="Azwad_Sifat_CV_EverAI.pdf" target="_blank" rel="noopener">Open CV (PDF)</a>
+            <a class="btn" href="Azwad_Sifat_Resume_EverAI.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
+          </div>
+        </div>
+        <dl class="rows">
+          <div class="row"><dt>Email</dt><dd id="email">sifatazwad789@gmail.com</dd><button class="copy" type="button" id="copy-email" data-copy="sifatazwad789@gmail.com" data-target="email">Copy</button></div>
+          <div class="row"><dt>Phone</dt><dd id="phone">+880 1895-639106</dd><button class="copy" type="button" id="copy-phone" data-copy="+8801895639106" data-target="phone">Copy</button></div>
+          <div class="row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/azwad-sifat-24986b451/" target="_blank" rel="noopener">linkedin.com/in/azwad-sifat-24986b451</a></dd><span></span></div>
+          <div class="row"><dt>Based in</dt><dd>Chattogram, Bangladesh · UTC+6</dd><span></span></div>
+        </dl>
+      </div>
+      <footer><span>© 2026 Azwad Sifat</span><span>Performance Marketer · Paid User Acquisition</span></footer>
+    </div>
+  </section>
+</main>
+
+<nav class="dock" aria-label="Sections">
+  <a class="dock-cv" href="Azwad_Sifat_CV_EverAI.pdf" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>CV
+  </a>
+  <div class="dock-links">
+    <a href="#work">Work</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<script>
+(() => {
+  /* ---------- dotted planet ---------- */
+  const hero = document.querySelector('.hero');
+  const canvas = document.getElementById('sky');
+  const ctx = canvas.getContext('2d');
+  const nameEl = document.querySelector('.hero-name');
+  const spacer = document.querySelector('.planet-space');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const BG = getComputedStyle(document.documentElement).getPropertyValue('--night').trim() || '#06080c';
+
+  let W = 0, H = 0, R = 220, cx = 0, cy = 0, stars = [], running = false, visible = true, raf = 0;
+  const layer = document.createElement('canvas'), lctx = layer.getContext('2d');
+
+  // points on a sphere (Fibonacci lattice) + a fixed "land" texture from value noise
+  const N = 8200, P = new Float32Array(N * 3), land = new Uint8Array(N);
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - ((i + 0.5) / N) * 2, r = Math.sqrt(1 - y * y), th = golden * i;
+    P[i * 3] = Math.cos(th) * r; P[i * 3 + 1] = y; P[i * 3 + 2] = Math.sin(th) * r;
+  }
+  const hash = (x, y, z) => {
+    let h = (Math.imul(x, 374761393) + Math.imul(y, 668265263) + Math.imul(z, 1440662683)) | 0;
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+  };
+  const smooth = (t) => t * t * (3 - 2 * t);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const noise = (x, y, z) => {
+    const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+    const u = smooth(x - xi), v = smooth(y - yi), w = smooth(z - zi);
+    const c = (a, b, d) => hash(xi + a, yi + b, zi + d);
+    return lerp(lerp(lerp(c(0,0,0), c(1,0,0), u), lerp(c(0,1,0), c(1,1,0), u), v),
+                lerp(lerp(c(0,0,1), c(1,0,1), u), lerp(c(0,1,1), c(1,1,1), u), v), w);
+  };
+  const vals = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    const x = P[i*3] * 1.6 + 7, y = P[i*3+1] * 1.6 + 7, z = P[i*3+2] * 1.6 + 7;
+    vals[i] = noise(x, y, z) * .62 + noise(x*2.3, y*2.3, z*2.3) * .28 + noise(x*5, y*5, z*5) * .1;
+  }
+  const thr = Float32Array.from(vals).sort()[Math.floor(N * 0.56)];
+  for (let i = 0; i < N; i++) land[i] = vals[i] > thr ? 1 : 0;
+
+  function makeStars() {
+    const count = Math.round((W * H) / 7000);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * W, y: Math.random() * H, s: Math.random() < .85 ? 1 : 1.8,
+      a: .25 + Math.random() * .55, sp: .5 + Math.random() * 1.5, ph: Math.random() * 6.28,
+    }));
+  }
+
+  function layout() {
+    W = hero.clientWidth;
+    R = Math.max(118, Math.min(236, W * 0.33));
+    spacer.style.height = Math.round(R * 1.42) + 'px';
+    H = hero.offsetHeight;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    layer.width = canvas.width; layer.height = canvas.height; lctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const hr = hero.getBoundingClientRect(), nr = nameEl.getBoundingClientRect();
+    cx = W / 2; cy = (nr.top - hr.top) + nr.height * 0.5 - R * 0.42;
+    makeStars();
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (const s of stars) {
+      ctx.globalAlpha = reduce ? s.a : s.a * (0.6 + 0.4 * Math.sin(t * s.sp + s.ph));
+      ctx.fillStyle = '#d6e2ff'; ctx.fillRect(s.x, s.y, s.s, s.s);
+    }
+    ctx.globalAlpha = 1;
+
+    // orbit: an ellipse around the planet; its upper half passes behind
+    const orx = R * 1.55, ory = R * 0.34, rot = -0.3, ox = cx + R * 0.04, oy = cy + R * 0.16;
+    const orbitAt = (a) => { const x = Math.cos(a) * orx, y = Math.sin(a) * ory;
+      return [ox + x * Math.cos(rot) - y * Math.sin(rot), oy + x * Math.sin(rot) + y * Math.cos(rot)]; };
+    const sat = reduce ? 0.6 : (t * 0.28) % (Math.PI * 2);
+    const satFront = Math.sin(sat) > 0;
+    const strokeOrbit = (a0, a1) => {
+      ctx.save(); ctx.setLineDash([2, 6]); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(191,214,255,.32)';
+      ctx.beginPath(); ctx.ellipse(ox, oy, orx, ory, rot, a0, a1); ctx.stroke(); ctx.restore();
+    };
+    const drawSat = () => { const [sx, sy] = orbitAt(sat);
+      ctx.fillStyle = 'rgba(94,234,212,.25)'; ctx.fillRect(sx - 4, sy - 4, 8, 8);
+      ctx.fillStyle = '#5eead4'; ctx.fillRect(sx - 1.5, sy - 1.5, 3, 3); };
+    strokeOrbit(Math.PI, Math.PI * 2);
+    if (!satFront) drawSat();
+
+    // the planet is drawn on its own layer, then its lower part dissolves into the sky
+    const L = lctx, fadeStart = cy + R * 0.1, fadeLen = R * 0.75, cutoff = fadeStart + fadeLen;
+    L.clearRect(0, 0, W, H);
+    const g = L.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.45);
+    g.addColorStop(0, 'rgba(120,160,255,.16)'); g.addColorStop(1, 'rgba(120,160,255,0)');
+    L.fillStyle = g; L.beginPath(); L.arc(cx, cy, R * 1.45, 0, Math.PI * 2); L.fill();
+    L.fillStyle = BG; L.beginPath(); L.arc(cx, cy, R + 1, 0, Math.PI * 2); L.fill(); // hides stars and the back of the orbit
+
+    const spin = reduce ? 0.9 : t * 0.09, tilt = 0.36;
+    const ca = Math.cos(spin), sa = Math.sin(spin), ct = Math.cos(tilt), st = Math.sin(tilt);
+    const Lx = -0.52, Ly = 0.56, Lz = 0.64; // light from upper left, in front
+    const k = R / 236;
+    L.fillStyle = '#bfd6ff';
+    for (let i = 0; i < N; i++) {
+      const x0 = P[i*3], y0 = P[i*3+1], z0 = P[i*3+2];
+      const x1 = x0 * ca + z0 * sa, z1 = -x0 * sa + z0 * ca;
+      const y2 = y0 * ct - z1 * st, z2 = y0 * st + z1 * ct;
+      if (z2 < 0.03) continue;
+      const sx = cx + x1 * R, sy = cy - y2 * R;
+      if (sy > cutoff) continue;
+      const lam = Math.max(0, x1 * Lx + y2 * Ly + z2 * Lz);
+      let a, size;
+      if (land[i]) { a = 0.16 + 0.84 * lam; size = (1.3 + 1.1 * z2) * k; }
+      else { a = 0.04 + 0.18 * lam; size = (0.9 + 0.4 * z2) * k; }
+      if (a < 0.02) continue;
+      L.globalAlpha = a; L.fillRect(sx - size / 2, sy - size / 2, size, size);
+    }
+    L.globalAlpha = 1;
+    L.strokeStyle = 'rgba(191,214,255,.28)'; L.lineWidth = 1; // thin limb on the dark side
+    L.beginPath(); L.arc(cx, cy, R + 0.5, -1.45, 0.55); L.stroke();
+
+    const fade = L.createLinearGradient(0, fadeStart, 0, cutoff);
+    fade.addColorStop(0, 'rgba(0,0,0,1)'); fade.addColorStop(1, 'rgba(0,0,0,0)');
+    L.globalCompositeOperation = 'destination-in'; L.fillStyle = fade; L.fillRect(0, 0, W, H);
+    L.globalCompositeOperation = 'source-over';
+    ctx.drawImage(layer, 0, 0, W, H);
+
+    strokeOrbit(0, Math.PI);
+    if (satFront) drawSat();
+  }
+
+  const loop = (now) => { draw(now / 1000); raf = requestAnimationFrame(loop); };
+  function start() { if (running || reduce || !visible || document.hidden) return; running = true; raf = requestAnimationFrame(loop); }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  function refresh() { layout(); draw(performance.now() / 1000); }
+
+  refresh();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  new ResizeObserver(() => refresh()).observe(hero);
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }).observe(hero);
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  start();
+
+  /* ---------- dock: highlight the section in view ---------- */
+  const links = [...document.querySelectorAll('.dock-links a')];
+  const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const spy = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      links.forEach((l) => { l.classList.remove('on'); l.removeAttribute('aria-current'); });
+      const a = byId.get(e.target.id);
+      if (a) { a.classList.add('on'); a.setAttribute('aria-current', 'true'); }
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['results', 'work', 'about', 'skills', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+  /* ---------- hide CV/resume buttons if a PDF is missing from the host ---------- */
+  const pdfLinks = [...document.querySelectorAll('a[href$=".pdf"]')];
+  [...new Set(pdfLinks.map((a) => a.getAttribute('href')))].forEach((file) => {
+    fetch(file, { method: 'HEAD' })
+      .then((r) => { if (!r.ok) throw new Error('missing'); })
+      .catch(() => pdfLinks.filter((a) => a.getAttribute('href') === file).forEach((a) => { a.hidden = true; }));
+  });
+
+  /* ---------- copy buttons ---------- */
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const reset = () => setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+      const selectIt = () => {
+        const el = document.getElementById(btn.dataset.target); const r = document.createRange();
+        r.selectNodeContents(el); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected'; reset();
+      };
+      try {
+        navigator.clipboard.writeText(btn.dataset.copy).then(() => { btn.textContent = 'Copied'; reset(); }, selectIt);
+      } catch (err) { selectIt(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
